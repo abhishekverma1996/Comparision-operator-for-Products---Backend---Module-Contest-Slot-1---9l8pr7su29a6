@@ -6,22 +6,26 @@
 // $lte=Matches values that are less than or equal to a specified value.
 // $in=Matches any of the values specified in an array.
 
-const router = require('express').Router();
-const Product = require('../models/productModels');
+const router = require("express").Router();
+const Product = require("../models/productModels");
 
 //  Will give a price which is qual to 19.99
-router.get('/eq', async (req, res) => {
+router.get("/eq", async (req, res) => {
   try {
     //Write a code here for eq operator
+    const products = await Product.find({ price: 19.99 });
+    res.send(products);
   } catch (error) {
     res.status(404).send(error);
   }
 });
 // Will give a value which has a price greater than 19.99
 // Greater Than Symbol="$gt"
-router.get('/gt', async (req, res) => {
+router.get("/gt", async (req, res) => {
   try {
     // write a code here for gt operator
+    const products = await Product.find({ price: { $gt: 19.99 } });
+    res.send(products);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -29,9 +33,11 @@ router.get('/gt', async (req, res) => {
 
 // will give a price which is greater than or equal to 100
 // Greater Than or equal to Symbol="$gte"
-router.get('/gte', async (req, res) => {
+router.get("/gte", async (req, res) => {
   try {
     // Write a code here for gte operator
+    const products = await Product.find({ price: { $gte: 100 } });
+    res.send(products);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -39,9 +45,11 @@ router.get('/gte', async (req, res) => {
 
 //will give a price which is less than 100
 // Less Than Symbol="$lt"
-router.get('/lt', async (req, res) => {
+router.get("/lt", async (req, res) => {
   try {
     // Write a code here for lt operator
+    const products = await Product.find({ price: { $lt: 100 } });
+    res.send(products);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -49,9 +57,11 @@ router.get('/lt', async (req, res) => {
 
 //will give a price which is less than or equal to 100
 // Less Than Equal To Symbol="$lte"
-router.get('/lte', async (req, res) => {
+router.get("/lte", async (req, res) => {
   try {
     // Write a code here for lte operator
+    const products = await Product.find({ price: { $lte: 100 } });
+    res.send(products);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -59,9 +69,11 @@ router.get('/lte', async (req, res) => {
 
 //will return price which includes 100,200
 //in symbol="$in"
-router.get('/in', async (req, res) => {
+router.get("/in", async (req, res) => {
   try {
     // Write a code here for in operator
+    const products = await Product.find({ price: { $in: [100, 200] } });
+    res.send(products);
   } catch (error) {
     res.status(404).send(error);
   }
